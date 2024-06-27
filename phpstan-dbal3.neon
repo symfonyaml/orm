@@ -34,3 +34,8 @@ parameters:
         -
             message: '~deprecated class Doctrine\\DBAL\\Tools\\Console\\Command\\ReservedWordsCommand\:~'
             path: src/Tools/Console/ConsoleRunner.php
+
+        # Compatibility with Persistence 3
+        -
+            message: '#Expression on left side of \?\? is not nullable.#'
+            path: src/Mapping/Driver/AttributeDriver.php
