@@ -33,14 +33,13 @@ Doctrine ORM is divided into four main packages.
 -  ORM (depends on DBAL+Persistence+Collections)
 
 This manual mainly covers the ORM package, sometimes touching parts
-of the underlying DBAL and Persistence packages. The Doctrine code base
-is split in to these packages for a few reasons and they are to...
+of the underlying DBAL and Persistence packages. The Doctrine codebase
+is split into these packages for a few reasons:
 
 
--  ...make things more maintainable and decoupled
--  ...allow you to use the code in Doctrine Persistence and Collections
-  without the ORM or DBAL
--  ...allow you to use the DBAL without the ORM
+-  to make things more maintainable and decoupled
+-  to allow you to use the code in Doctrine Persistence and Collections without the ORM or DBAL
+-  to allow you to use the DBAL without the ORM
 
 Collection, Event Manager and Persistence
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
