@@ -1101,6 +1101,14 @@ class ClassMetadataTest extends OrmTestCase
             $xmlElement->children()->{'discriminator-map'}->{'discriminator-mapping'}[0]->attributes()['value'],
         );
     }
+
+    public function testDiscriminatorMapWithSameClassMultipleTimesDeprecated(): void
+    {
+        $this->expectDeprecationWithIdentifier('https://github.com/doctrine/orm/issues/3519');
+
+        $cm = new ClassMetadata(CMS\CmsUser::class);
+        $cm->setDiscriminatorMap(['foo' => CMS\CmsUser::class, 'bar' => CMS\CmsUser::class]);
+    }
 }
 
 #[MappedSuperclass]
