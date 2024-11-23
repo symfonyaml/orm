@@ -887,7 +887,7 @@ class ClassMetadataTest extends OrmTestCase
         $cm->setAssociationOverride('parentDirectory', ['cascade' => ['all']]);
 
         $mapping = $cm->getAssociationMapping('parentDirectory');
-        self::assertSame(['remove', 'persist', 'refresh', 'detach'], $mapping['cascade']);
+        self::assertSame(['remove', 'persist', 'refresh', 'detach'], $mapping->cascade);
     }
 
     #[TestGroup('DDC-1955')]
