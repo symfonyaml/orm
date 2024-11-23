@@ -82,3 +82,21 @@ parameters:
         -
             message: '~deprecated class Doctrine\\Common\\Persistence\\PersistentObject\:~'
             path: src/EntityManager.php
+
+        -
+            message: '#Cannot access offset \S+ on .*ClassMetadata.*#'
+            paths:
+                - src/Mapping/Driver/XmlDriver.php
+                - src/Mapping/Driver/YamlDriver.php
+
+        -
+            message: '#^Parameter \#1 \$orderings of method Doctrine\\Common\\Collections\\Criteria\:\:orderBy\(\) expects array\<string\>, array\<string, Doctrine\\Common\\Collections\\Order\|string\> given\.$#'
+            path: src/PersistentCollection.php
+
+        -
+            message: '#^Parameter \#5 \.\.\.\$args of static method Doctrine\\Deprecations\\Deprecation\:\:trigger\(\) expects float\|int\|string, string\|false given\.$#'
+            path: src/Mapping/ClassMetadataFactory.php
+
+        -
+            message: '#^Parameter \#1 \$classNames of method Doctrine\\ORM\\Mapping\\ClassMetadataInfo\<object\>\:\:setParentClasses\(\) expects array\<int, class\-string\>, array\<string\> given\.$#'
+            path: src/Mapping/ClassMetadataFactory.php

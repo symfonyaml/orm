@@ -66,6 +66,19 @@ parameters:
             message: '~deprecated class Doctrine\\DBAL\\Tools\\Console\\Command\\ImportCommand\:~'
             path: src/Tools/Console/ConsoleRunner.php
 
+        -
+            message: '#^Method Doctrine\\ORM\\AbstractQuery\:\:getHydrationCacheId\(\) should return array\{string, string\} but returns array\<string\>\.$#'
+            path: src/AbstractQuery.php
+
+        -
+            message: '#^Method Doctrine\\ORM\\Internal\\Hydration\\AbstractHydrator\:\:\w+\(\) has parameter \$stmt with no value type specified in iterable type Doctrine\\DBAL\\Driver\\ResultStatement\.$#'
+            path: src/Internal/Hydration/AbstractHydrator.php
+
+        -
+            message: '#^Parameter \#1 \$key of method Psr\\Cache\\CacheItemPoolInterface\:\:deleteItem\(\) expects string, string\|false given\.$#'
+            path: src/Query
+
+
         # Symfony cache supports passing a key prefix to the clear method.
         - '/^Method Psr\\Cache\\CacheItemPoolInterface\:\:clear\(\) invoked with 1 parameter, 0 required\.$/'
 
