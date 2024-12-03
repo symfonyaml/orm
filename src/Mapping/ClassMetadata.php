@@ -25,7 +25,10 @@ use ReflectionProperty;
 use Stringable;
 
 use function array_column;
+use function array_count_values;
 use function array_diff;
+use function array_filter;
+use function array_flip;
 use function array_intersect;
 use function array_key_exists;
 use function array_keys;
@@ -39,6 +42,7 @@ use function count;
 use function defined;
 use function enum_exists;
 use function explode;
+use function implode;
 use function in_array;
 use function interface_exists;
 use function is_string;
@@ -73,6 +77,8 @@ use function trim;
  */
 class ClassMetadata implements PersistenceClassMetadata, Stringable
 {
+    use GetReflectionClassImplementation;
+
     /* The inheritance mapping types */
     /**
      * NONE means the class does not participate in an inheritance hierarchy
@@ -930,16 +936,6 @@ class ClassMetadata implements PersistenceClassMetadata, Stringable
                 }
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * Can return null when using static reflection, in violation of the LSP
-     */
-    public function getReflectionClass(): ReflectionClass|null
-    {
-        return $this->reflClass;
     }
 
     /** @psalm-param array{usage?: mixed, region?: mixed} $cache */
@@ -2190,6 +2186,22 @@ class ClassMetadata implements PersistenceClassMetadata, Stringable
      */
     public function setDiscriminatorMap(array $map): void
     {
+        if (count(array_flip($map)) !== count($map)) {
+            Deprecation::trigger(
+                'doctrine/orm',
+                'https://github.com/doctrine/orm/issues/3519',
+                <<<'DEPRECATION'
+                Mapping a class to multiple discriminator values is deprecated,
+                and the discriminator mapping of %s contains duplicate values
+                for the following discriminator values: %s.
+                DEPRECATION,
+                $this->name,
+                implode(', ', array_keys(array_filter(array_count_values($map), static function (int $value): bool {
+                    return $value > 1;
+                }))),
+            );
+        }
+
         foreach ($map as $value => $className) {
             $this->addDiscriminatorMapClass($value, $className);
         }

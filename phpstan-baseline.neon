@@ -486,7 +486,7 @@ parameters:
 			path: src/EntityManager.php
 
 		-
-			message: "#^Method Doctrine\\\\ORM\\\\EntityManager\\:\\:isUninitializedObject\\(\\) has parameter \\$obj with no type specified\\.$#"
+			message: "#^Method Doctrine\\\\ORM\\\\EntityManager\\:\\:isUninitializedObject\\(\\) has parameter \\$value with no type specified\\.$#"
 			count: 1
 			path: src/EntityManager.php
 
@@ -753,6 +753,11 @@ parameters:
 		-
 			message: "#^Access to an undefined property Doctrine\\\\ORM\\\\Mapping\\\\ManyToManyInverseSideMapping\\|Doctrine\\\\ORM\\\\Mapping\\\\ManyToManyOwningSideMapping\\|Doctrine\\\\ORM\\\\Mapping\\\\ManyToOneAssociationMapping\\|Doctrine\\\\ORM\\\\Mapping\\\\OneToManyAssociationMapping\\|Doctrine\\\\ORM\\\\Mapping\\\\OneToOneInverseSideMapping\\|Doctrine\\\\ORM\\\\Mapping\\\\OneToOneOwningSideMapping\\:\\:\\$joinColumns\\.$#"
 			count: 4
+			path: src/Mapping/ClassMetadata.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
 			path: src/Mapping/ClassMetadata.php
 
 		-
