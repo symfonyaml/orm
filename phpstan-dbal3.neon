@@ -59,3 +59,19 @@ parameters:
         -
             message: '~.*executeStatement.*expects~'
             path: src/Query/Exec/MultiTableUpdateExecutor.php
+
+        -
+            message: '~method_exists.*getEventManager~'
+            path: src/EntityManager.php
+
+        -
+            message: '~method_exists.*getIdentitySequence~'
+            path: src/Mapping/ClassMetadataFactory.php
+
+        -
+            message: '~expand(Criteria)?Parameters.*should return array~'
+            path: src/Persisters/Entity/BasicEntityPersister.php
+
+        -
+            message: '~inferType.*never returns~'
+            path: src/Query/ParameterTypeInferer.php

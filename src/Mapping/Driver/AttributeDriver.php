@@ -15,7 +15,6 @@ use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionMethod;
-use ReflectionProperty;
 
 use function assert;
 use function class_exists;
@@ -273,8 +272,6 @@ class AttributeDriver implements MappingDriver
         }
 
         foreach ($reflectionClass->getProperties() as $property) {
-            assert($property instanceof ReflectionProperty);
-
             if ($this->isRepeatedPropertyDeclaration($property, $metadata)) {
                 continue;
             }
@@ -285,8 +282,6 @@ class AttributeDriver implements MappingDriver
             // Evaluate #[Cache] attribute
             $cacheAttribute = $this->reader->getPropertyAttribute($property, Mapping\Cache::class);
             if ($cacheAttribute !== null) {
-                assert($cacheAttribute instanceof Mapping\Cache);
-
                 $mapping['cache'] = $metadata->getAssociationCacheDefaults(
                     $mapping['fieldName'],
                     [
@@ -560,7 +555,6 @@ class AttributeDriver implements MappingDriver
                 $listenerClass = new ReflectionClass($listenerClassName);
 
                 foreach ($listenerClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-                    assert($method instanceof ReflectionMethod);
                     // find method callbacks.
                     $callbacks  = $this->getMethodCallbacks($method);
                     $hasMapping = $hasMapping ?: ! empty($callbacks);
@@ -584,7 +578,6 @@ class AttributeDriver implements MappingDriver
             }
 
             foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-                assert($method instanceof ReflectionMethod);
                 foreach ($this->getMethodCallbacks($method) as $value) {
                     $metadata->addLifecycleCallback($value[0], $value[1]);
                 }
